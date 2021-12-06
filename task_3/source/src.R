@@ -134,8 +134,10 @@ vias_poblado$largo = lapply(vias_poblado$geometry,st_length) #distancia en metro
 #1.5.1 En blanco
 
 #1.5.2
+p_load(ggsn)
+
 ggplot() + geom_sf(data=depto , col="red") + geom_sf(data=c_medico , col="blue") +
-        geom_sf(data=c_poblado , col="green")+ theme_bw() 
+        geom_sf(data=c_poblado , col="green")+ north(depto) +theme_bw() 
 
 ###
 #PUNTO 2
