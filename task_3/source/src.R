@@ -117,15 +117,25 @@ via = st_transform(via,crs)
 accidentes_santader = st_crop(mapmuse,depto)
 plot(accidentes_santader)
 
+
+
 #1.4.2
 
-poblado = c_poblado[1,]
-vias_poblado = st_crop(via,poblado)
+poblado = c_poblado[1,] #escogí el primer poblado
+vias_poblado = st_crop(via,poblado) #para seleccionar los puntos del poblado (que son los que me interesan)
 
+#calcular largo de las vias
 vias_poblado$largo = lapply(vias_poblado$geometry,st_length) #distancia en metros
 
 
 
+#1.5 PINTAR MAPAS
+
+#1.5.1 En blanco
+
+#1.5.2
+ggplot() + geom_sf(data=depto , col="red") + geom_sf(data=c_medico , col="blue") +
+        geom_sf(data=c_poblado , col="green")+ theme_bw() 
 
 ###
 #PUNTO 2
@@ -161,10 +171,10 @@ mapmuse$dist_cpoblado = rowMins(dist_cpoblado)
 #Construir la variable fallecido
 mapmuse = mutate(mapmuse, fallecido = ifelse(estado=="Muerto",1,0))
 
+
+#convertir objeto sf en dataframe
 p_load(sfheaders)
 mapmuse_df = sf_to_df(mapmuse,fill=TRUE)
-
-
 
 
 #******#******#******#******#******#******
